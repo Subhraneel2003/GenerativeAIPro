@@ -1,0 +1,8 @@
+streamlit==1.28.0
+chromadb==0.4.18
+crewai==0.28.1
+langchain==0.0.335
+langchain-huggingface==0.0.1
+transformers==4.35.2
+python-dotenv==1.0.0
+requests==2.31.0

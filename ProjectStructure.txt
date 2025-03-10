@@ -1,0 +1,23 @@
+project_root/
+├── .env                     # Environment variables and API keys
+├── main.py                  # Main Streamlit application
+├── agents/
+│   ├── __init__.py
+│   ├── project_lead.py      # Project Lead agent
+│   ├── business_analyst.py  # Business Analyst agent
+│   ├── design_agent.py      # Design agent
+│   ├── developer_agent.py   # Developer agent
+│   ├── testing_agent.py     # Testing agent
+├── utils/
+│   ├── __init__.py
+│   ├── database.py          # ChromaDB utilities
+│   ├── templates.py         # Template handling
+│   ├── conversation.py      # Conversation utilities
+├── templates/
+│   ├── user_story.md        # User story template
+│   ├── design_doc.md        # Design document template
+│   ├── code_template.py     # Code template
+│   ├── test_case.md         # Test case template
+├── data/                    # Storage for ChromaDB
+├── logs/                    # Log files
+└── requirements.txt         # Project dependencies
