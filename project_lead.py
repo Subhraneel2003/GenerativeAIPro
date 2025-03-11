@@ -11,7 +11,7 @@ class ProjectLead:
         Respond to a question about the project
         """
         # Create context from project artifacts
-        context = self._prepare_context(project_name, requirements, artifacts)
+        context = self._prepare_context(project_name, requirements, artifacts, question)  # Pass 'question' here
         
         # Create the prompt for the LLM
         prompt = f"""
