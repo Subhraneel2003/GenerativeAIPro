@@ -2,15 +2,26 @@ import os
 
 def get_template(template_name):
     """
-    Load a template file from the templates directory
+    Load a template file from the templates directory.
+    If the template does not exist, create default templates and then load the requested template.
+    
+    Args:
+        template_name (str): Name of the template file to load.
+    
+    Returns:
+        str: Content of the template file.
+    
+    Raises:
+        FileNotFoundError: If the template file cannot be found or created.
     """
     template_path = os.path.join("templates", template_name)
     
     if not os.path.exists(template_path):
-        # Create default templates if they don't exist
-        create_default_templates()
+        if not os.path.exists("templates"):
+            # Create default templates if they don't exist
+            create_default_templates()
     
-    # Attempt to read the file again after creating default templates
+    # Attempt to read the file after ensuring it exists
     if os.path.exists(template_path):
         with open(template_path, "r") as f:
             return f.read()
@@ -19,13 +30,18 @@ def get_template(template_name):
 
 def create_default_templates():
     """
-    Create default templates if they don't exist
+    Create default templates in the 'templates' directory if they don't already exist.
+    
+    Raises:
+        RuntimeError: If there is an issue creating the directory or writing the templates.
     """
     try:
+        # Create the 'templates' directory if it doesn't exist
         os.makedirs("templates", exist_ok=True)
     except Exception as e:
         raise RuntimeError(f"Failed to create 'templates' directory: {e}")
     
+    # Define default templates
     templates = {
         "user_story.md": """# User Story
 
@@ -86,27 +102,27 @@ import [module]
 
 # Classes
 class [ClassName]:
-    """
+    \"\"\"
     [Class description]
-    """
+    \"\"\"
     
     def __init__(self):
-        """
+        \"\"\"
         Initialize the class
-        """
+        \"\"\"
         pass
     
     def [method_name](self):
-        """
+        \"\"\"
         [Method description]
-        """
+        \"\"\"
         pass
 
 # Main function
 def main():
-    """
+    \"\"\"
     Main function
-    """
+    \"\"\"
     pass
 
 if __name__ == "__main__":
@@ -143,6 +159,7 @@ if __name__ == "__main__":
 """
     }
     
+    # Write default templates to files
     for filename, content in templates.items():
         path = os.path.join("templates", filename)
         try:
@@ -151,9 +168,10 @@ if __name__ == "__main__":
                     f.write(content)
         except Exception as e:
             raise RuntimeError(f"Failed to create template file '{filename}': {e}")
+
 # Example usage
 try:
     user_story_template = get_template("user_story.md")
     print(user_story_template)
 except Exception as e:
-    print(f"Error: {e}")        
+    print(f"Error: {e}")
